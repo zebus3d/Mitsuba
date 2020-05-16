@@ -3,9 +3,9 @@ from bpy.types import (Panel)
 
 # secondary panels
 
-class MITSUBA_PT_ui_integrators(Panel):
-    bl_label = "Integrator"
-    bl_idname = "MITSUBA_PT_ui_integrators"
+class MITSUBA_PT_ui_samples(Panel):
+    bl_label = "Sampler"
+    bl_idname = "MITSUBA_PT_ui_samples"
     bl_parent_id = "MITSUBA_PT_ui"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
@@ -22,6 +22,7 @@ class MITSUBA_PT_ui_integrators(Panel):
         flow = layout.grid_flow(align=True)
         col = flow.column()
 
-        col.prop(scene.mitsuba, 'integratorType')
+        col.prop(scene.mitsuba, 'samplerType')
+        col.prop(scene.mitsuba, 'sampleCount')
 
         col.separator()

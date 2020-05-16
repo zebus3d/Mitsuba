@@ -40,12 +40,15 @@ if "bpy" in locals():
         importlib.reload(MITSUBA_PT_ui)
     if "MITSUBA_PT_ui_integrators" in locals():
         importlib.reload(MITSUBA_PT_ui_integrators)
+    if "MITSUBA_PT_ui_intMITSUBA_PT_ui_samplesegrators" in locals():
+        importlib.reload(MITSUBA_PT_ui_samples)
 else:
     import bpy
     from .core.engine import MitsubaRenderEngine
     from .core.draw import MitsubaDrawData
     from .ui.panels.main import MITSUBA_PT_ui
     from .ui.panels.integrators import MITSUBA_PT_ui_integrators
+    from .ui.panels.samples import MITSUBA_PT_ui_samples
 
 
 # RenderEngines also need to tell UI Panels that they are compatible with.
@@ -80,13 +83,16 @@ def get_panels():
 all_classes = [
     MitsubaRenderEngine,
     MITSUBA_PT_ui,
-    MITSUBA_PT_ui_integrators
+    MITSUBA_PT_ui_integrators,
+    MITSUBA_PT_ui_samples
     # MitsubaDrawData, # es una clase normal python no tiene tipo de blender por eso no la registro 
 ]
 
 
 def register():
     from bpy.utils import register_class
+    from .ui.properties import MitsubaProperties
+    all_classes.append(MitsubaProperties)
 
     if len(all_classes) > 1:
         for cls in all_classes:
@@ -94,15 +100,10 @@ def register():
     else:
         register_class(all_classes[0])
 
-    # Register the RenderEngine
-    # bpy.utils.register_class(MitsubaRenderEngine)
-    
-    from .ui.properties import create_properties
-    create_properties()
+    bpy.types.Scene.mitsuba = bpy.props.PointerProperty(type=MitsubaProperties)
 
     for panel in get_panels():
         panel.COMPAT_ENGINES.add('MITSUBA')
-
 
 
 def unregister():
@@ -115,9 +116,7 @@ def unregister():
     else:
         unregister_class(all_classes[0])
 
-    # bpy.utils.unregister_class(MitsubaRenderEngine)
-
-    del bpy.types.Scene.IntegratorType
+    del bpy.types.Scene.mitsuba
 
     for panel in get_panels():
         if 'MITSUBA' in panel.COMPAT_ENGINES:
