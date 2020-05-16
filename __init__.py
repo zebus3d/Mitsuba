@@ -97,7 +97,7 @@ def register():
     # Register the RenderEngine
     # bpy.utils.register_class(MitsubaRenderEngine)
     
-    from .properties import create_properties
+    from .ui.properties import create_properties
     create_properties()
 
     for panel in get_panels():
