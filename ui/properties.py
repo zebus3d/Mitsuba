@@ -25,17 +25,18 @@ class MitsubaProperties(PropertyGroup):
     
     # sampler:
     sampler_types = (
-        ("independent", "Independent", "", 1),
-        ("stratified", "Stratified", "", 2),
-        ("low_discrepancy", "Low discrepancy", "", 3),
-        ("halton_qmc_sampler", "Halton QMC sampler", "", 5),
-        ("hammersley_qmc_sampler", "Hammersley_QMC_sampler", "", 5),
-        ("sobol_qmc_sampler", "Sobol QMC sampler", "", 6),
+        ("independent", "Independent", "", 0),
+        ("in_the_future", "In the future there will be more", "", 1),
+        # ("stratified", "Stratified", "", 1),
+        # ("low_discrepancy", "Low discrepancy", "", 2),
+        # ("halton_qmc_sampler", "Halton QMC sampler", "", 3),
+        # ("hammersley_qmc_sampler", "Hammersley_QMC_sampler", "", 4),
+        # ("sobol_qmc_sampler", "Sobol QMC sampler", "", 5),
     )
     samplerType : bpy.props.EnumProperty(
         items=sampler_types,
         name="Type",
-        default="low_discrepancy",
+        default="independent",
         description="",
         # update=combo_texture_limit_changed
     )
