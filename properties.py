@@ -3,7 +3,6 @@ from .on_changed import *
 
 
 def create_properties():
-    print("creando propiedades")
 
     # settigns comboboxes:
     integrator_types = (
