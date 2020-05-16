@@ -6,8 +6,8 @@ def create_properties():
 
     # settigns comboboxes:
     integrator_types = (
-        ("direct_illumination", "Direct Illumination", "", 0),
-        ("path_tracer", "Path Tracer", "", 1),
+        ("path_tracer", "Path Tracer", "", 0),
+        ("direct_illumination", "Direct Illumination", "", 1),
         ("photon_mapper", "Photon Mapper", "", 2),
         ("simple_volumetric", "Simple Volumetric Path Tracer", "", 3),
         ("extended_volumetric", "Extended Volumetric Path Tracer", "", 4),
