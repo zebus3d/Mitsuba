@@ -1,9 +1,10 @@
 import bpy
 from bpy.types import (Panel)
 
-class MITSUBA_PT_ui(Panel):
-    bl_label = "Mitsuba Render settings"
-    bl_idname = "MITSUBA_PT_ui"
+
+class MITSUBA_PT_ui_integrators(Panel):
+    bl_label = "Integrator settings"
+    bl_idname = "MITSUBA_PT_ui_integrators"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "render"
@@ -27,16 +28,8 @@ class MITSUBA_PT_ui(Panel):
         flow = layout.grid_flow(align=True)
         col = flow.column()
 
-        col = layout.box()
-        col.label(text="Simplify")
+        # col = layout.box() # las cajas negras
+        col.label(text="Integrator settings")
+        col.prop(scene, 'IntegratorType')
 
         col.separator()
-
-        # col.alignment = 'RIGHT'
-        col = layout.box()
-        col.label(text="Miscellaneous")
-
-        col.prop(scene.cycles, 'use_adaptive_sampling')
-        col.prop(scene, 'Caustics')
-        col.prop(scene, 'Denoisers')
-        col.prop(scene, 'SingleAnimation')
