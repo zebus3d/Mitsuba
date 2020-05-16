@@ -1,6 +1,7 @@
 import bpy
 from bpy.types import (Panel)
 
+# secondary panels
 
 class MITSUBA_PT_ui_integrators(Panel):
     bl_label = "Integrator settings"
@@ -21,8 +22,6 @@ class MITSUBA_PT_ui_integrators(Panel):
         flow = layout.grid_flow(align=True)
         col = flow.column()
 
-        # col = layout.box() # las cajas negras
-        col.label(text="Integrator settings")
         col.prop(scene, 'IntegratorType')
 
         col.separator()
