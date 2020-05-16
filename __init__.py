@@ -56,6 +56,8 @@ def get_panels():
     exclude_panels = [
         'VIEWLAYER_PT_filter',
         'VIEWLAYER_PT_layer_passes',
+        'CYCLES_VIEW3D_PT_simplify_greasepencil',
+        'RENDER_PT_simplify_greasepencil',
     ]
     target_panels = [
         'RENDER_PT_dimensions',

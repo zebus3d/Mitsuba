@@ -5,17 +5,10 @@ from bpy.types import (Panel)
 class MITSUBA_PT_ui_integrators(Panel):
     bl_label = "Integrator settings"
     bl_idname = "MITSUBA_PT_ui_integrators"
+    bl_parent_id = "MITSUBA_PT_ui"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "render"
-
-    @classmethod
-    def poll(cls, context):
-        engine = context.scene.render.engine
-        if engine != 'MITSUBA':
-            return False
-        else:
-            return True
 
     def draw(self, context):
         layout = self.layout

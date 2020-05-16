@@ -16,5 +16,5 @@ def create_properties():
             items=integrator_types,
             name="Integrator Type",
             description="",
-            update=combo_texture_limit_changed
+            # update=combo_texture_limit_changed
         )

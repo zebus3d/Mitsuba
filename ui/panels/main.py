@@ -1,6 +1,7 @@
 import bpy
 from bpy.types import (Panel)
 
+
 class MITSUBA_PT_ui(Panel):
     bl_label = "Mitsuba settings"
     bl_idname = "MITSUBA_PT_ui"
@@ -11,10 +12,7 @@ class MITSUBA_PT_ui(Panel):
     @classmethod
     def poll(cls, context):
         engine = context.scene.render.engine
-        if engine != 'MITSUBA':
-            return False
-        else:
-            return True
+        return engine == 'MITSUBA'
 
     def draw(self, context):
         layout = self.layout
@@ -22,11 +20,8 @@ class MITSUBA_PT_ui(Panel):
         layout.use_property_split = True
         layout.use_property_decorate = False
 
-        scene = context.scene
-
-        flow = layout.grid_flow(align=True)
-        col = flow.column()
-
+        # scene = context.scene
+        # flow = layout.grid_flow(align=True)
+        # col = flow.column()
         # col = layout.box() # las cajas negras
-
-        col.separator()
+        # col.separator()
