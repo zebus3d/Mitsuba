@@ -51,6 +51,9 @@ else:
     from .ui.panels.samples import MITSUBA_PT_ui_samples
 
 
+from bpy.props import PointerProperty
+#from bpy.props import CollectionProperty
+
 # RenderEngines also need to tell UI Panels that they are compatible with.
 # We recommend to enable all panels marked as BLENDER_EEVEE, and then
 # exclude any panels that are replaced by custom panels registered by the
@@ -100,7 +103,7 @@ def register():
     else:
         register_class(all_classes[0])
 
-    bpy.types.Scene.mitsuba = bpy.props.PointerProperty(type=MitsubaProperties)
+    bpy.types.Scene.mitsuba = PointerProperty(type=MitsubaProperties)
 
     for panel in get_panels():
         panel.COMPAT_ENGINES.add('MITSUBA')
