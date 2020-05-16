@@ -1,5 +1,5 @@
 import bpy
-from .on_changed import *
+from .when_updating_property import *
 
 
 def create_properties():
@@ -14,7 +14,7 @@ def create_properties():
     if integrator_types:
         bpy.types.Scene.IntegratorType = bpy.props.EnumProperty(
             items=integrator_types,
-            name="Integrator Type",
+            name="Type",
             description="",
             # update=combo_texture_limit_changed
         )
