@@ -4,7 +4,7 @@ from bpy.types import (Panel)
 # secondary panels
 
 class MITSUBA_PT_ui_integrators(Panel):
-    bl_label = "Integrators"
+    bl_label = "Integrator"
     bl_idname = "MITSUBA_PT_ui_integrators"
     bl_parent_id = "MITSUBA_PT_ui"
     bl_space_type = 'PROPERTIES'

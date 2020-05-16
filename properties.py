@@ -6,8 +6,8 @@ def create_properties():
 
     # settigns comboboxes:
     integrator_types = (
-        ("OFF", "Direct", "", 0),
-        ("128", "Path", "", 1),
+        ("direct", "Direct", "", 0),
+        ("path", "Path", "", 1),
     )
 
     # setup comboboxes:

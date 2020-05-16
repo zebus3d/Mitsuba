@@ -42,8 +42,8 @@ if "bpy" in locals():
         importlib.reload(MITSUBA_PT_ui_integrators)
 else:
     import bpy
-    from .classes.engine import MitsubaRenderEngine
-    from .classes.draw import MitsubaDrawData
+    from .core.engine import MitsubaRenderEngine
+    from .core.draw import MitsubaDrawData
     from .ui.panels.main import MITSUBA_PT_ui
     from .ui.panels.integrators import MITSUBA_PT_ui_integrators
 
