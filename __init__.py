@@ -71,7 +71,7 @@ def get_panels():
     for panel in bpy.types.Panel.__subclasses__():
         if hasattr(panel, 'COMPAT_ENGINES'):
             panel_name = panel.__name__
-            # print(panel_name)
+            # print(panel_name) # for view avalidable panels uncoment this line
             if panel_name in target_panels and panel_name not in exclude_panels:
                 panels.append(panel)
 
