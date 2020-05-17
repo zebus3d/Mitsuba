@@ -1,5 +1,5 @@
 import bpy
-from bpy.types import (Panel)
+from bpy.types import Panel
 
 # secondary panels
 

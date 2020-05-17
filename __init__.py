@@ -108,9 +108,6 @@ def register():
 
     if len(all_classes) > 1:
         for cls in all_classes:
-            print("registrando: ", cls.__name__)
-            print("idname: ", cls.bl_idname)
-
             register_class(cls)
     else:
         register_class(all_classes[0])
@@ -125,8 +122,7 @@ def unregister():
     from bpy.utils import unregister_class
 
     if len(all_classes) > 1:
-        for cls in all_classes:
-            print("des-registrando: ", cls.__name__)
+        for cls in reversed(all_classes):
             unregister_class(cls)
     else:
         unregister_class(all_classes[0])
