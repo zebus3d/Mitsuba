@@ -6,8 +6,8 @@ from bpy.types import PropertyGroup
 class MitsubaProperties(PropertyGroup):
     # integrators
     integrator_types = (
-        ("path_tracer", "Path Tracer", "", 0),
-        ("direct_illumination", "Direct Illumination", "", 1),
+        ("direct_illumination", "Direct Illumination", "", 0),
+        ("path_tracer", "Path Tracer", "", 1),
         ("photon_mapper", "Photon Mapper", "", 2),
         ("simple_volumetric", "Simple Volumetric Path Tracer", "", 3),
         ("extended_volumetric", "Extended Volumetric Path Tracer", "", 4),
@@ -19,6 +19,7 @@ class MitsubaProperties(PropertyGroup):
     integratorType : bpy.props.EnumProperty(
         items=integrator_types,
         name="Type",
+        default="path_tracer",
         description="",
         # update=combo_texture_limit_changed
     )
