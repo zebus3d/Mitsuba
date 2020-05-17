@@ -46,6 +46,8 @@ if "bpy" in locals():
         importlib.reload(MITSUBA_PT_ui_integrators)
     if "MITSUBA_PT_ui_intMITSUBA_PT_ui_samplesegrators" in locals():
         importlib.reload(MITSUBA_PT_ui_samples)
+    # Tanto MitsubaAddonPreferences como MitsubaProperties
+    # esta excluidas porque me dice que ya estan registradas como subclases 
     all_classes = [
         MitsubaRenderEngine,
         MITSUBA_PT_ui,
