@@ -14,4 +14,5 @@ class MitsubaAddonPreferences(AddonPreferences):
     
     def draw(self, context):
         layout = self.layout
+        layout.label(text="This is a preferences view for our add-on")
         layout.prop(self, "install_path")
