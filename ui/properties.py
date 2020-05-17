@@ -4,6 +4,8 @@ from bpy.types import PropertyGroup
 from bpy.props import (EnumProperty, IntProperty)
 
 class MitsubaProperties(PropertyGroup):
+    bl_idname = __name__
+
     # integrators
     integrator_types = (
         ("direct_illumination", "Direct Illumination", "", 0),

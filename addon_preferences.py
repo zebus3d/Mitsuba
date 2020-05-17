@@ -3,9 +3,9 @@ from bpy.props import (StringProperty)
 
 class MitsubaAddonPreferences(AddonPreferences):
     # this must match the addon name
-    bl_idname = "mitsuba_addon_preferences"
+    bl_idname = __name__
 
-    install_path: StringProperty(
+    binary_path: StringProperty(
         name="Path to Mitsuba Installation",
         description='Path to Mitsuba install directory',
         subtype='DIR_PATH',
@@ -15,4 +15,4 @@ class MitsubaAddonPreferences(AddonPreferences):
     def draw(self, context):
         layout = self.layout
         layout.label(text="This is a preferences view for our add-on")
-        layout.prop(self, "install_path")
+        layout.prop(self, "binary_path")

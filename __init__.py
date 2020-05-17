@@ -46,6 +46,12 @@ if "bpy" in locals():
         importlib.reload(MITSUBA_PT_ui_integrators)
     if "MITSUBA_PT_ui_intMITSUBA_PT_ui_samplesegrators" in locals():
         importlib.reload(MITSUBA_PT_ui_samples)
+    all_classes = [
+        MitsubaRenderEngine,
+        MITSUBA_PT_ui,
+        MITSUBA_PT_ui_integrators,
+        MITSUBA_PT_ui_samples
+    ]
 else:
     import bpy
     from .addon_preferences import MitsubaAddonPreferences
@@ -55,7 +61,14 @@ else:
     from .ui.panels.main import MITSUBA_PT_ui
     from .ui.panels.integrators import MITSUBA_PT_ui_integrators
     from .ui.panels.samples import MITSUBA_PT_ui_samples
-
+    all_classes = [
+        MitsubaAddonPreferences,
+        MitsubaRenderEngine,
+        MitsubaProperties,
+        MITSUBA_PT_ui,
+        MITSUBA_PT_ui_integrators,
+        MITSUBA_PT_ui_samples
+    ]
 
 from bpy.props import PointerProperty
 #from bpy.props import CollectionProperty
@@ -89,22 +102,15 @@ def get_panels():
 
     return panels
 
-all_classes = [
-    MitsubaAddonPreferences,
-    MitsubaRenderEngine,
-    MitsubaProperties,
-    MITSUBA_PT_ui,
-    MITSUBA_PT_ui_integrators,
-    MITSUBA_PT_ui_samples
-    # MitsubaDrawData, # es una clase normal python no tiene tipo de blender por eso no la registro 
-]
-
 
 def register():
     from bpy.utils import register_class
 
     if len(all_classes) > 1:
         for cls in all_classes:
+            print("registrando: ", cls.__name__)
+            print("idname: ", cls.bl_idname)
+
             register_class(cls)
     else:
         register_class(all_classes[0])
@@ -116,11 +122,11 @@ def register():
 
 
 def unregister():
-
     from bpy.utils import unregister_class
 
     if len(all_classes) > 1:
-        for cls in reversed(all_classes):
+        for cls in all_classes:
+            print("des-registrando: ", cls.__name__)
             unregister_class(cls)
     else:
         unregister_class(all_classes[0])
