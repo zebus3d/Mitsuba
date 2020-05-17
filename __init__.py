@@ -32,10 +32,14 @@ bl_info = {
 
 if "bpy" in locals():
     import importlib
+    if "MitsubaAddonPreferences" in locals():
+        importlib.reload(MitsubaAddonPreferences)
     if "MitsubaRenderEngine" in locals():
         importlib.reload(MitsubaRenderEngine),
     if "MitsubaDrawData" in locals():
         importlib.reload(MitsubaDrawData)
+    if "MitsubaProperties" in locals():
+        importlib.reload(MitsubaProperties)
     if "MITSUBA_PT_ui" in locals():
         importlib.reload(MITSUBA_PT_ui)
     if "MITSUBA_PT_ui_integrators" in locals():
@@ -44,8 +48,10 @@ if "bpy" in locals():
         importlib.reload(MITSUBA_PT_ui_samples)
 else:
     import bpy
+    from .addon_preferences import MitsubaAddonPreferences
     from .core.engine import MitsubaRenderEngine
     from .core.draw import MitsubaDrawData
+    from .ui.properties import MitsubaProperties
     from .ui.panels.main import MITSUBA_PT_ui
     from .ui.panels.integrators import MITSUBA_PT_ui_integrators
     from .ui.panels.samples import MITSUBA_PT_ui_samples
@@ -84,7 +90,9 @@ def get_panels():
     return panels
 
 all_classes = [
+    MitsubaAddonPreferences,
     MitsubaRenderEngine,
+    MitsubaProperties,
     MITSUBA_PT_ui,
     MITSUBA_PT_ui_integrators,
     MITSUBA_PT_ui_samples
@@ -94,8 +102,6 @@ all_classes = [
 
 def register():
     from bpy.utils import register_class
-    from .ui.properties import MitsubaProperties
-    all_classes.append(MitsubaProperties)
 
     if len(all_classes) > 1:
         for cls in all_classes:

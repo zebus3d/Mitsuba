@@ -1,7 +1,7 @@
 import bpy
 from .when_updating_property import *
 from bpy.types import PropertyGroup
-
+from bpy.props import (EnumProperty, IntProperty)
 
 class MitsubaProperties(PropertyGroup):
     # integrators
@@ -16,7 +16,7 @@ class MitsubaProperties(PropertyGroup):
         ("stochastic_progresive", "Stochastic Progresive Phoyon Mapping", "", 7),
         ("ambient_occlusion", "Ambient Occlusion", "", 8),
     )
-    integratorType : bpy.props.EnumProperty(
+    integratorType : EnumProperty(
         items=integrator_types,
         name="Type",
         default="path_tracer",
@@ -34,14 +34,14 @@ class MitsubaProperties(PropertyGroup):
         # ("hammersley_qmc_sampler", "Hammersley_QMC_sampler", "", 4),
         # ("sobol_qmc_sampler", "Sobol QMC sampler", "", 5),
     )
-    samplerType : bpy.props.EnumProperty(
+    samplerType : EnumProperty(
         items=sampler_types,
         name="Type",
         default="independent",
         description="",
         # update=combo_texture_limit_changed
     )
-    sampleCount : bpy.props.IntProperty(
+    sampleCount : IntProperty(
         name='Pixel Samples',
         default=16,
         min=1,
