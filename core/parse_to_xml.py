@@ -38,6 +38,6 @@ class PARSE_OT_scene(Operator):
             # print(dir_path, mitusba_binary)
             # print( os.path.isfile( filepath ) )
         else:
-            self.report({'WARNING'}, 'It is mandatory to indicate in the preferences the correct location of the mitsuba executable. ')
+            self.report({'WARNING'}, 'It is mandatory to indicate in the addon preferences the correct location of the mitsuba executable. ')
 
         return {'FINISHED'}
