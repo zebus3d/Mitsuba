@@ -9,7 +9,9 @@ class PARSE_OT_scene(Operator):
     
     def execute(self, context):    
         
-        integratorType = context.scene.mitsuba.integratorType
+        scn_props = context.scene.mitsuba
+        integratorType = scn_props.integratorType
+        maxDepth = str(scn_props.maxDepth)
 
         # scene to xml
         scene = Element('scene')
@@ -21,7 +23,7 @@ class PARSE_OT_scene(Operator):
         if integratorType == 'path':
             integer = SubElement(integrator, 'integer')
             integer.set('name', 'max_depth')
-            integer.set('value', '23')
+            integer.set('value', maxDepth)
 
         xmlstr_prettify = minidom.parseString( tostring(scene, encoding='utf-8', method='html') ).toprettyxml(indent="    ")
         

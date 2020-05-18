@@ -26,7 +26,14 @@ class MitsubaProperties(PropertyGroup):
         description="",
         update=integrator_changed
     )
-    
+    maxDepth: IntProperty(
+        name='Max Depth',
+        default=23,
+        min=0,
+        soft_min=0,
+        description='',
+        # update=min_ao_counces_changed
+    )
     # sampler:
     sampler_types = (
         ("independent", "Independent", "", 0),

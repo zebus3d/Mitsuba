@@ -23,5 +23,5 @@ class MITSUBA_PT_ui_integrators(Panel):
         col = flow.column()
 
         col.prop(scene.mitsuba, 'integratorType')
-
-        col.separator()
+        if context.scene.mitsuba.integratorType == 'path':
+            col.prop(scene.mitsuba, 'maxDepth')
