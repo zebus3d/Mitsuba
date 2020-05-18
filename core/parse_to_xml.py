@@ -12,6 +12,7 @@ class PARSE_OT_scene(Operator):
         scn_props = context.scene.mitsuba
         integratorType = scn_props.integratorType
         maxDepth = str(scn_props.maxDepth)
+        filepath = context.preferences.addons['Mitsuba'].preferences.filepath
 
         # scene to xml
         scene = Element('scene')
@@ -28,5 +29,7 @@ class PARSE_OT_scene(Operator):
         xmlstr_prettify = minidom.parseString( tostring(scene, encoding='utf-8', method='html') ).toprettyxml(indent="    ")
         
         print( xmlstr_prettify )
+
+        print(filepath)
 
         return {'FINISHED'}
