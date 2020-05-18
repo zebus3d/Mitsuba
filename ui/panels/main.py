@@ -16,4 +16,14 @@ class MITSUBA_PT_ui(Panel):
         return engine == 'MITSUBA'
 
     def draw(self, context):
-        pass
+        layout = self.layout
+
+        layout.use_property_split = True
+        layout.use_property_decorate = False
+
+        scene = context.scene
+
+        flow = layout.grid_flow(align=True)
+
+        col = flow.column()
+        col.operator("parse.scene", text="Export Scene")

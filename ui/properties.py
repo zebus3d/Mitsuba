@@ -1,27 +1,30 @@
 import bpy
-from .when_updating_property import *
+from .when_updating_property import integrator_changed
 from bpy.types import PropertyGroup
 from bpy.props import EnumProperty, IntProperty
 
 class MitsubaProperties(PropertyGroup):
     # integrators
     integrator_types = (
-        ("direct_illumination", "Direct Illumination", "", 0),
-        ("path_tracer", "Path Tracer", "", 1),
-        ("photon_mapper", "Photon Mapper", "", 2),
-        ("simple_volumetric", "Simple Volumetric Path Tracer", "", 3),
-        ("extended_volumetric", "Extended Volumetric Path Tracer", "", 4),
-        ("energy_redistribution", "Energy Redistribution PT", "", 5),
-        ("primary_sample_space_mtl", "Primary Sample Space MTL", "", 6),
-        ("stochastic_progresive", "Stochastic Progresive Phoyon Mapping", "", 7),
-        ("ambient_occlusion", "Ambient Occlusion", "", 8),
+        ("direct", "Direct Illumination", "", 0),
+        ("path", "Path Tracer", "", 1),
+        ("aov", "(AOV) Arbitrary Output Variables", "", 2),
+        ("moment", "Moment", "", 3),
+        ("stokes", "Stokes Vector", "", 4),
+        # ("photon_mapper", "Photon Mapper", "", 2),
+        # ("simple_volumetric", "Simple Volumetric Path Tracer", "", 3),
+        # ("extended_volumetric", "Extended Volumetric Path Tracer", "", 4),
+        # ("energy_redistribution", "Energy Redistribution PT", "", 5),
+        # ("primary_sample_space_mtl", "Primary Sample Space MTL", "", 6),
+        # ("stochastic_progresive", "Stochastic Progresive Phoyon Mapping", "", 7),
+        # ("ambient_occlusion", "Ambient Occlusion", "", 8),
     )
     integratorType: EnumProperty(
         items=integrator_types,
         name="Type",
-        default="path_tracer",
+        default="path",
         description="",
-        # update=combo_texture_limit_changed
+        update=integrator_changed
     )
     
     # sampler:
