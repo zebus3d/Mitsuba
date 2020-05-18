@@ -1,6 +1,7 @@
 from bpy.types import Operator
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.dom import minidom
+import os
 
 class PARSE_OT_scene(Operator):
     bl_label = "Export"
@@ -30,6 +31,13 @@ class PARSE_OT_scene(Operator):
         
         print( xmlstr_prettify )
 
-        print(filepath)
+        if filepath and os.path.isfile( filepath ):           
+            print(filepath)
+            # mitusba_binary = os.path.basename( os.path.normpath(filepath) )
+            # dir_path = filepath.replace(mitusba_binary, '')
+            # print(dir_path, mitusba_binary)
+            # print( os.path.isfile( filepath ) )
+        else:
+            self.report({'WARNING'}, 'It is mandatory to indicate in the preferences the correct location of the mitsuba executable. ')
 
         return {'FINISHED'}
