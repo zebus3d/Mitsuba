@@ -1,3 +1,14 @@
+bl_info = {
+    "name": "Mitsuba",
+    "description": "Extra Official addon for Mitsuba2",
+    "author": "zebus3d",
+    "version": (0, 0, 1),
+    "blender": (2, 83, 0),
+    "location": "",
+    "wiki_url": "https://github.com/zebus3d/Mitsuba",
+    "category": "Render"
+}
+
 '''
     Jorge Hernández - Meléndez Saiz
     zebus3dream@gmail.com
@@ -15,18 +26,6 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
-
-
-bl_info = {
-    "name": "Mitsuba",
-    "description": "",
-    "author": "zebus3d",
-    "version": (0, 0, 1),
-    "blender": (2, 83, 0),
-    "location": "",
-    "wiki_url": "",
-    "category": "Render"
-}
 
 if "bpy" in locals():
     import importlib
@@ -50,14 +49,7 @@ if "bpy" in locals():
         importlib.reload(MITSUBA_PT_ui_sensor)
     # Tanto MitsubaAddonPreferences como MitsubaProperties
     # esta excluidas porque me dice que ya estan registradas como subclases 
-    all_classes = [
-        MitsubaRenderEngine,
-        MITSUBA_PT_ui,
-        MITSUBA_PT_ui_integrators,
-        MITSUBA_PT_ui_samples,
-        PARSE_OT_scene,
-        MITSUBA_PT_ui_sensor
-    ]
+    # all_classes = [ blabla sin esas dos ]
 else:
     import bpy
     from .addon_preferences import MitsubaAddonPreferences
@@ -69,16 +61,8 @@ else:
     from .ui.panels.samples import MITSUBA_PT_ui_samples
     from .ui.panels.sensor import MITSUBA_PT_ui_sensor
     from .core.parse_to_xml import PARSE_OT_scene
-    all_classes = [
-        MitsubaAddonPreferences,
-        MitsubaRenderEngine,
-        MitsubaProperties,
-        MITSUBA_PT_ui,
-        MITSUBA_PT_ui_integrators,
-        MITSUBA_PT_ui_samples,
-        PARSE_OT_scene,
-        MITSUBA_PT_ui_sensor
-    ]
+    # all_classes = [ blabal con todas ]
+
 
 from bpy.props import PointerProperty
 #from bpy.props import CollectionProperty
@@ -109,6 +93,17 @@ def get_panels():
                 panels.append(panel)
 
     return panels
+
+all_classes = [
+        MitsubaAddonPreferences,
+        MitsubaRenderEngine,
+        MitsubaProperties,
+        MITSUBA_PT_ui,
+        MITSUBA_PT_ui_integrators,
+        MITSUBA_PT_ui_samples,
+        PARSE_OT_scene,
+        MITSUBA_PT_ui_sensor
+    ]
 
 
 def register():
