@@ -3,9 +3,9 @@ from bpy.types import Panel
 
 # secondary panels
 
-class MITSUBA_PT_ui_samples(Panel):
-    bl_label = "Sampler"
-    bl_idname = "MITSUBA_PT_ui_samples"
+class MITSUBA_PT_ui_sensor(Panel):
+    bl_label = "Sensor"
+    bl_idname = "MITSUBA_PT_ui_sensor"
     bl_parent_id = "MITSUBA_PT_ui"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
@@ -22,5 +22,4 @@ class MITSUBA_PT_ui_samples(Panel):
         flow = layout.grid_flow(align=True)
         col = flow.column()
 
-        col.prop(scene.mitsuba, 'samplerType')
-        col.prop(scene.mitsuba, 'sampleCount')
+        col.prop(scene.mitsuba, 'sensorType')

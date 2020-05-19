@@ -48,6 +48,8 @@ if "bpy" in locals():
         importlib.reload(MITSUBA_PT_ui_samples)
     if "PARSE_OT_scene" in locals():
         importlib.reload(PARSE_OT_scene)
+    if "MITSUBA_PT_ui_sensor" in locals():
+        importlib.reload(MITSUBA_PT_ui_sensor)
     # Tanto MitsubaAddonPreferences como MitsubaProperties
     # esta excluidas porque me dice que ya estan registradas como subclases 
     all_classes = [
@@ -55,7 +57,8 @@ if "bpy" in locals():
         MITSUBA_PT_ui,
         MITSUBA_PT_ui_integrators,
         MITSUBA_PT_ui_samples,
-        PARSE_OT_scene
+        PARSE_OT_scene,
+        MITSUBA_PT_ui_sensor
     ]
 else:
     import bpy
@@ -66,6 +69,7 @@ else:
     from .ui.panels.main import MITSUBA_PT_ui
     from .ui.panels.integrators import MITSUBA_PT_ui_integrators
     from .ui.panels.samples import MITSUBA_PT_ui_samples
+    from .ui.panels.sensor import MITSUBA_PT_ui_sensor
     from .core.parse_to_xml import PARSE_OT_scene
     all_classes = [
         MitsubaAddonPreferences,
@@ -74,7 +78,8 @@ else:
         MITSUBA_PT_ui,
         MITSUBA_PT_ui_integrators,
         MITSUBA_PT_ui_samples,
-        PARSE_OT_scene
+        PARSE_OT_scene,
+        MITSUBA_PT_ui_sensor
     ]
 
 from bpy.props import PointerProperty

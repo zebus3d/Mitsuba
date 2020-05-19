@@ -1,7 +1,14 @@
+import bpy
 from bpy.types import Operator
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.dom import minidom
 import os
+
+
+def prview_my_xml(my_xml):
+    xmlstr_prettify = minidom.parseString( tostring(my_xml, encoding='utf-8', method='html') ).toprettyxml(indent="    ")    
+    print( xmlstr_prettify )
+
 
 class PARSE_OT_scene(Operator):
     bl_label = "Export"
@@ -10,10 +17,12 @@ class PARSE_OT_scene(Operator):
     
     def execute(self, context):    
         
+        active_camera = bpy.data.scenes[context.scene.name].camera
         scn_props = context.scene.mitsuba
         integratorType = scn_props.integratorType
         maxDepth = str(scn_props.maxDepth)
         filepath = context.preferences.addons['Mitsuba'].preferences.filepath
+        sensorType = scn_props.sensorType
 
         # scene to xml
         scene = Element('scene')
@@ -27,9 +36,18 @@ class PARSE_OT_scene(Operator):
             integer.set('name', 'max_depth')
             integer.set('value', maxDepth)
 
-        xmlstr_prettify = minidom.parseString( tostring(scene, encoding='utf-8', method='html') ).toprettyxml(indent="    ")
+        sensor = SubElement(scene, 'sensor')
+        sensor.set('type', sensorType)
+
+        transform = SubElement(sensor, 'transform')
+        transform.set('name', 'to_world')
+        lookat = SubElement(transform, 'lookat')
+        lookat.set('origin', '')
+        lookat.set('target', '')
+        lookat.set('up', '')
+
         
-        print( xmlstr_prettify )
+        prview_my_xml(scene)
 
         if filepath and os.path.isfile( filepath ):           
             print(filepath)

@@ -59,3 +59,20 @@ class MitsubaProperties(PropertyGroup):
         description='Number of samples to use for estimating the illumination at each pixel',
         # update=min_ao_counces_changed
     )
+    # sensor type:
+    sensor_types = (
+        ("perspective", "Perspective", "", 0),
+        ("thinlens", "Thinlens", "", 1),
+        # ("stratified", "Stratified", "", 1),
+        # ("low_discrepancy", "Low discrepancy", "", 2),
+        # ("halton_qmc_sampler", "Halton QMC sampler", "", 3),
+        # ("hammersley_qmc_sampler", "Hammersley_QMC_sampler", "", 4),
+        # ("sobol_qmc_sampler", "Sobol QMC sampler", "", 5),
+    )
+    sensorType: EnumProperty(
+        items=sensor_types,
+        name="Type",
+        default="thinlens",
+        description="Perspective simple or Perspective with whin thinlens (use thinlens for DOF)",
+        # update=combo_texture_limit_changed
+    )
