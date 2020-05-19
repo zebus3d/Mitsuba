@@ -25,7 +25,7 @@ class PARSE_OT_scene(Operator):
         active_camera = bpy.data.scenes[context.scene.name].camera
         cam_origin = vector3_to_string( active_camera.location )
         # La @ es para multiplicar matrices con vectores
-        cam_target = vector3_to_string(active_camera.matrix_world @ Vector((0,0,-1,1)) )
+        cam_target = vector3_to_string( active_camera.matrix_world @ Vector((0,0,-1,1)) )
         cam_up = vector3_to_string( active_camera.matrix_world @ Vector((0,1,0,0)) )
 
         scn_props = context.scene.mitsuba
