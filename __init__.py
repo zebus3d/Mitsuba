@@ -130,7 +130,3 @@ def unregister():
     for panel in get_panels():
         if 'MITSUBA' in panel.COMPAT_ENGINES:
             panel.COMPAT_ENGINES.remove('MITSUBA')
-
-
-if __name__ == "__main__":
-    register()
