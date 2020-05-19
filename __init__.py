@@ -1,6 +1,4 @@
 '''
-    Copyright (c) 2020
-
     Jorge Hernández - Meléndez Saiz
     zebus3dream@gmail.com
 
