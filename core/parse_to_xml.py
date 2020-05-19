@@ -23,6 +23,11 @@ class PARSE_OT_scene(Operator):
     def execute(self, context):
 
         active_camera = bpy.data.scenes[context.scene.name].camera
+
+        if not active_camera:
+            self.report({'ERROR'}, 'The main camera at the scene has not been found.')
+            return {'CANCELLED'}
+
         cam_origin = vector3_to_string( active_camera.location )
         # La @ es para multiplicar matrices con vectores
         cam_target = vector3_to_string( active_camera.matrix_world @ Vector((0, 0, -1, 1)) )
