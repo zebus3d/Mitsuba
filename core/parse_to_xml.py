@@ -3,11 +3,16 @@ from bpy.types import Operator
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.dom import minidom
 import os
-
+from mathutils import Vector
 
 def prview_my_xml(my_xml):
     xmlstr_prettify = minidom.parseString( tostring(my_xml, encoding='utf-8', method='html') ).toprettyxml(indent="    ").replace("<?xml version=\"1.0\" ?>", "\nXML Preview:")
     print( xmlstr_prettify )
+
+
+def vector3_to_string(v):
+    vector3_stringified = str(v[0]) + ', ' + str(v[1]) + ', ' + str(v[2])
+    return vector3_stringified
 
 
 class PARSE_OT_scene(Operator):
@@ -18,6 +23,11 @@ class PARSE_OT_scene(Operator):
     def execute(self, context):    
         
         active_camera = bpy.data.scenes[context.scene.name].camera
+        cam_origin = vector3_to_string( active_camera.location )
+        # La @ es para multiplicar matrices con vectores
+        cam_target = vector3_to_string(active_camera.matrix_world @ Vector((0,0,-1,1)) )
+        cam_up = vector3_to_string( active_camera.matrix_world @ Vector((0,1,0,0)) )
+
         scn_props = context.scene.mitsuba
         integratorType = scn_props.integratorType
         maxDepth = str(scn_props.maxDepth)
@@ -53,10 +63,15 @@ class PARSE_OT_scene(Operator):
         # transform
         transform = SubElement(sensor, 'transform')
         transform.set('name', 'to_world')
+
+        # lookat transformations – this is primarily useful for setting up cameras. 
+        # The origin coordinates specify the camera origin, target is the point 
+        # that the camera will look at, and the (optional) up parameter determines 
+        # the upward direction in the final rendered image.
         lookat = SubElement(transform, 'lookat')
-        lookat.set('origin', '')
-        lookat.set('target', '')
-        lookat.set('up', '')
+        lookat.set('origin', cam_origin)
+        lookat.set('target', cam_target)
+        lookat.set('up', cam_up)
 
         
         prview_my_xml(scene)
