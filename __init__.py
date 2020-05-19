@@ -94,6 +94,7 @@ def get_panels():
 
     return panels
 
+
 all_classes = [
         MitsubaAddonPreferences,
         MitsubaRenderEngine,
@@ -109,11 +110,8 @@ all_classes = [
 def register():
     from bpy.utils import register_class
 
-    if len(all_classes) > 1:
-        for cls in all_classes:
-            register_class(cls)
-    else:
-        register_class(all_classes[0])
+    for cls in all_classes:
+        register_class(cls)
 
     bpy.types.Scene.mitsuba = PointerProperty(type=MitsubaProperties)
 
@@ -124,11 +122,8 @@ def register():
 def unregister():
     from bpy.utils import unregister_class
 
-    if len(all_classes) > 1:
-        for cls in reversed(all_classes):
-            unregister_class(cls)
-    else:
-        unregister_class(all_classes[0])
+    for cls in reversed(all_classes):
+        unregister_class(cls)
 
     del bpy.types.Scene.mitsuba
 
