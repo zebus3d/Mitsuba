@@ -19,9 +19,9 @@ class PARSE_OT_scene(Operator):
     bl_label = "Export"
     bl_idname = "parse.scene"
     bl_description = "Export"
-    
-    def execute(self, context):    
-        
+
+    def execute(self, context):
+
         active_camera = bpy.data.scenes[context.scene.name].camera
         cam_origin = vector3_to_string( active_camera.location )
         # La @ es para multiplicar matrices con vectores
@@ -43,7 +43,7 @@ class PARSE_OT_scene(Operator):
         # integrator
         integrator = SubElement(scene, 'integrator')
 
-        integrator.set('type', integratorType)        
+        integrator.set('type', integratorType)
         if integratorType == 'path':
             integer = SubElement(integrator, 'integer')
             integer.set('name', 'max_depth')
@@ -64,19 +64,19 @@ class PARSE_OT_scene(Operator):
         transform = SubElement(sensor, 'transform')
         transform.set('name', 'to_world')
 
-        # lookat transformations – this is primarily useful for setting up cameras. 
-        # The origin coordinates specify the camera origin, target is the point 
-        # that the camera will look at, and the (optional) up parameter determines 
+        # lookat transformations – this is primarily useful for setting up cameras.
+        # The origin coordinates specify the camera origin, target is the point
+        # that the camera will look at, and the (optional) up parameter determines
         # the upward direction in the final rendered image.
         lookat = SubElement(transform, 'lookat')
         lookat.set('origin', cam_origin)
         lookat.set('target', cam_target)
         lookat.set('up', cam_up)
 
-        
+
         prview_my_xml(scene)
 
-        if filepath and os.path.isfile( filepath ): 
+        if filepath and os.path.isfile( filepath ):
             print(filepath)
             # mitusba_binary = os.path.basename( os.path.normpath(filepath) )
             # dir_path = filepath.replace(mitusba_binary, '')
