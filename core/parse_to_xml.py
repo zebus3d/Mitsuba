@@ -49,7 +49,7 @@ class PARSE_OT_scene(Operator):
         
         prview_my_xml(scene)
 
-        if filepath and os.path.isfile( filepath ):           
+        if filepath and os.path.isfile( filepath ): 
             print(filepath)
             # mitusba_binary = os.path.basename( os.path.normpath(filepath) )
             # dir_path = filepath.replace(mitusba_binary, '')
