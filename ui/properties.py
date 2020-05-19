@@ -51,9 +51,10 @@ class MitsubaProperties(PropertyGroup):
         description="",
         # update=combo_texture_limit_changed
     )
+    # sample_count
     sampleCount: IntProperty(
         name='Pixel Samples',
-        default=16,
+        default=4,
         min=1,
         soft_min=1,
         description='Number of samples to use for estimating the illumination at each pixel',

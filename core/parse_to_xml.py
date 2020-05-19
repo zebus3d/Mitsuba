@@ -23,11 +23,14 @@ class PARSE_OT_scene(Operator):
         maxDepth = str(scn_props.maxDepth)
         filepath = context.preferences.addons['Mitsuba'].preferences.filepath
         sensorType = scn_props.sensorType
+        samplerType = scn_props.samplerType
+        sampleCount = str(scn_props.sampleCount)
 
         # scene to xml
         scene = Element('scene')
         scene.set('version', '2.0.0')
 
+        # integrator
         integrator = SubElement(scene, 'integrator')
 
         integrator.set('type', integratorType)        
@@ -36,9 +39,18 @@ class PARSE_OT_scene(Operator):
             integer.set('name', 'max_depth')
             integer.set('value', maxDepth)
 
+        # sensor
         sensor = SubElement(scene, 'sensor')
         sensor.set('type', sensorType)
 
+        # sampler
+        sampler = SubElement(sensor, 'sampler')
+        sampler.set('type', samplerType)
+        integer = SubElement(sampler, 'integer')
+        integer.set('name', 'sample_count')
+        integer.set('value', sampleCount)
+
+        # transform
         transform = SubElement(sensor, 'transform')
         transform.set('name', 'to_world')
         lookat = SubElement(transform, 'lookat')
