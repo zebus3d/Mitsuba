@@ -52,7 +52,7 @@ if "bpy" in locals():
     # all_classes = [ blabla sin esas dos ]
 else:
     import bpy
-    from .addon_preferences import MitsubaAddonPreferences
+    from .ui.addon_preferences import MitsubaAddonPreferences
     from .core.engine import MitsubaRenderEngine
     from .core.draw import MitsubaDrawData
     from .ui.properties import MitsubaProperties
