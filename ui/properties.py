@@ -31,14 +31,14 @@ class MitsubaProperties(PropertyGroup):
         name='Aperture Radius',
         default=0.01,
         precision=2,
-        step = 0.01,
+        step = 1,
         description='Denotes the radius of the camera’s aperture in scene units',
     )
     focus_distance: FloatProperty(
         name='Focus Distance',
         default=0,
         precision=2,
-        step = 0.01,
+        step = 1,
         description='Denotes the world-space distance from the camera’s aperture to the focal plane',
     )
     focal_length: StringProperty(
@@ -49,8 +49,10 @@ class MitsubaProperties(PropertyGroup):
     fov: FloatProperty(
         name='Fov',
         default=0.01,
-        min=1,
-        max=179,
+        min=0.01,
+        max=179.00,
+        precision=2,
+        step = 1,
         description='Denotes the camera’s field of view in degrees — must be between 1 and 179',
     )
     fov_axis: StringProperty(

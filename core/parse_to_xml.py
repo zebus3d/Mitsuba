@@ -42,6 +42,8 @@ class PARSE_OT_scene(Operator):
         sensorType = scn_props.sensorType
         aperture_radius = str( "%.2f" % scn_props.aperture_radius )
         focus_distance = str( "%.2f" % scn_props.focus_distance )
+        focal_length = scn_props.focal_length
+        fov = str( "%.2f" % scn_props.fov )
 
         samplerType = scn_props.samplerType
         sampleCount = str( scn_props.sampleCount )
@@ -55,6 +57,7 @@ class PARSE_OT_scene(Operator):
 
         # integrator
         integrator = SubElement(scene, 'integrator')
+
 
         # Instantiate a path tracer with a max.
         # path length of maxDepth
@@ -76,6 +79,9 @@ class PARSE_OT_scene(Operator):
             fd_float = SubElement(sensor, 'float')
             fd_float.set('name', 'focus_distance')
             fd_float.set('value', focus_distance)
+        fov_float = SubElement(sensor, 'float')
+        fov_float.set('name', 'fov')
+        fov_float.set('value', fov)
         # <float name="fov" value="45"/>
 
         # sampler
