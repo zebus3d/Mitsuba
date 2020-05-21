@@ -1,3 +1,4 @@
+
 bl_info = {
     "name": "Mitsuba",
     "description": "Extra Official addon for Mitsuba2",
@@ -8,6 +9,7 @@ bl_info = {
     "wiki_url": "https://github.com/zebus3d/Mitsuba",
     "category": "Render"
 }
+
 
 '''
     Jorge Hernández - Meléndez Saiz
@@ -26,6 +28,7 @@ bl_info = {
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
+
 
 if "bpy" in locals():
     import importlib
@@ -48,7 +51,7 @@ if "bpy" in locals():
     if "MITSUBA_PT_ui_sensor" in locals():
         importlib.reload(MITSUBA_PT_ui_sensor)
     # Tanto MitsubaAddonPreferences como MitsubaProperties
-    # esta excluidas porque me dice que ya estan registradas como subclases 
+    # esta excluidas porque me dice que ya estan registradas como subclases
     # all_classes = [ blabla sin esas dos ]
 else:
     import bpy
@@ -65,7 +68,7 @@ else:
 
 
 from bpy.props import PointerProperty
-#from bpy.props import CollectionProperty
+
 
 # RenderEngines also need to tell UI Panels that they are compatible with.
 # We recommend to enable all panels marked as BLENDER_EEVEE, and then
@@ -130,3 +133,4 @@ def unregister():
     for panel in get_panels():
         if 'MITSUBA' in panel.COMPAT_ENGINES:
             panel.COMPAT_ENGINES.remove('MITSUBA')
+
