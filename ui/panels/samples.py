@@ -22,5 +22,9 @@ class MITSUBA_PT_ui_samples(Panel):
         flow = layout.grid_flow(align=True)
         col = flow.column()
 
+        # in the future have more sample types:
         col.prop(scene.mitsuba, 'samplerType')
+        col.enabled = False
+
+        col = flow.column()
         col.prop(scene.mitsuba, 'sampleCount')
