@@ -67,11 +67,10 @@ class PARSE_OT_scene(Operator):
             integer.set('name', 'max_depth')
             integer.set('value', maxDepth)
 
-        # sensor
-        # Instantiate Camera
+        # Sensor
         sensor = SubElement(scene, 'sensor')
         sensor.set('type', sensorType)
-        # sensor para thinlens:
+        # sensor exceptions for thinlens:
         if sensorType == 'thinlens':
             ar_float = SubElement(sensor, 'float')
             ar_float.set('name', 'aperture_radius')
@@ -79,10 +78,13 @@ class PARSE_OT_scene(Operator):
             fd_float = SubElement(sensor, 'float')
             fd_float.set('name', 'focus_distance')
             fd_float.set('value', focus_distance)
+        # common options for the both sensors:
+        fl_str = SubElement(sensor, 'string')
+        fl_str.set('name', 'focal_length')
+        fl_str.set('value', focal_length)
         fov_float = SubElement(sensor, 'float')
         fov_float.set('name', 'fov')
         fov_float.set('value', fov)
-        # <float name="fov" value="45"/>
 
         # sampler
         # Render with x samples per pixel using a samplerType sampling strategy
