@@ -1,8 +1,7 @@
-import bpy
+import bpy, os
 from bpy.types import Operator
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.dom import minidom
-import os
 from mathutils import Vector
 
 def prview_my_xml(my_xml):
