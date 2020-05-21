@@ -7,6 +7,9 @@ from mathutils import Vector
 
 def prview_my_xml(my_xml):
     xmlstr_prettify = minidom.parseString( tostring(my_xml, encoding='utf-8', method='html') ).toprettyxml(indent="    ").replace("<?xml version=\"1.0\" ?>", "\nXML Preview:")
+    xmlstr_prettify = xmlstr_prettify.replace('origin=', '\n                    origin=')
+    xmlstr_prettify = xmlstr_prettify.replace('target=', '\n                    target=')
+    xmlstr_prettify = xmlstr_prettify.replace('up=', '\n                    up=')
     print( xmlstr_prettify )
 
 
