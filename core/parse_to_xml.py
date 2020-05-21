@@ -52,6 +52,8 @@ class PARSE_OT_scene(Operator):
         # integrator
         integrator = SubElement(scene, 'integrator')
 
+        # Instantiate a path tracer with a max.
+        # path length of maxDepth
         integrator.set('type', integratorType)
         if integratorType == 'path':
             integer = SubElement(integrator, 'integer')
@@ -59,10 +61,13 @@ class PARSE_OT_scene(Operator):
             integer.set('value', maxDepth)
 
         # sensor
+        # Instantiate Camera
         sensor = SubElement(scene, 'sensor')
         sensor.set('type', sensorType)
+        # <float name="fov" value="45"/>
 
         # sampler
+        # Render with x samples per pixel using a samplerType sampling strategy
         sampler = SubElement(sensor, 'sampler')
         sampler.set('type', samplerType)
         integer = SubElement(sampler, 'integer')
@@ -82,6 +87,7 @@ class PARSE_OT_scene(Operator):
         lookat.set('target', cam_target)
         lookat.set('up', cam_up)
 
+        # Generate an EXR image
         film = SubElement(sensor, 'film')
         film.set('type', 'hdrfilm')
         integer = SubElement(film, 'integer')

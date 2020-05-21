@@ -23,3 +23,8 @@ class MITSUBA_PT_ui_sensor(Panel):
         col = flow.column()
 
         col.prop(scene.mitsuba, 'sensorType')
+        col.prop(scene.mitsuba, 'focal_length')
+        col.prop(scene.mitsuba, 'fov')
+        col.prop(scene.mitsuba, 'fov_axis')
+        col.prop(scene.mitsuba, 'near_clip')
+        col.prop(scene.mitsuba, 'far_clip')

@@ -1,7 +1,7 @@
 import bpy
 from .when_updating_property import integrator_changed
 from bpy.types import PropertyGroup
-from bpy.props import EnumProperty, IntProperty
+from bpy.props import EnumProperty, IntProperty, FloatProperty, StringProperty
 
 class MitsubaProperties(PropertyGroup):
     # integrators
@@ -25,6 +25,33 @@ class MitsubaProperties(PropertyGroup):
         default="path",
         description="",
         update=integrator_changed
+    )
+    focal_length: StringProperty(
+        name='Focal Length',
+        default='50mm',
+        description='Denotes the camera’s focal length specified using 35mm film equivalent units',
+    )
+    fov: FloatProperty(
+        name='Fov',
+        default=0.01,
+        min=1,
+        max=179,
+        description='Denotes the camera’s field of view in degrees—must be between 1 and 179',
+    )
+    fov_axis: StringProperty(
+        name='Fov Axis',
+        default='x',
+        description='specifies the image axis',
+    )
+    near_clip: FloatProperty(
+        name='Near Clip',
+        default=0.01,
+        description='Distance to the near clip plane',
+    )
+    far_clip: FloatProperty(
+        name='Far Clip',
+        default=10000,
+        description='Distance to the far clip planes',
     )
     maxDepth: IntProperty(
         name='Max Depth',
