@@ -22,7 +22,8 @@ class PARSE_OT_scene(Operator):
 
     def execute(self, context):
 
-        active_camera = bpy.data.scenes[context.scene.name].camera
+        scene = bpy.data.scenes[context.scene.name]
+        active_camera = scene.camera
 
         if not active_camera:
             self.report({'ERROR'}, 'The main camera at the scene has not been found.')
@@ -40,6 +41,9 @@ class PARSE_OT_scene(Operator):
         sensorType = scn_props.sensorType
         samplerType = scn_props.samplerType
         sampleCount = str(scn_props.sampleCount)
+
+        r_width = str( scene.render.resolution_x )
+        r_height = str( scene.render.resolution_y )
 
         # scene to xml
         scene = Element('scene')
@@ -78,6 +82,14 @@ class PARSE_OT_scene(Operator):
         lookat.set('target', cam_target)
         lookat.set('up', cam_up)
 
+        film = SubElement(sensor, 'film')
+        film.set('type', 'hdrfilm')
+        integer = SubElement(film, 'integer')
+        integer.set('name', 'width')
+        integer.set('value', r_width)
+        integer = SubElement(film, 'integer')
+        integer.set('name', 'height')
+        integer.set('value', r_height)
 
         prview_my_xml(scene)
 
