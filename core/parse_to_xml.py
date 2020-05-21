@@ -75,13 +75,26 @@ class PARSE_OT_scene(Operator):
             ar_float = SubElement(sensor, 'float')
             ar_float.set('name', 'aperture_radius')
             ar_float.set('value', aperture_radius)
+            #
             fd_float = SubElement(sensor, 'float')
             fd_float.set('name', 'focus_distance')
             fd_float.set('value', focus_distance)
         # common options for the both sensors:
+        transform = SubElement(sensor, 'transform')
+        transform.set('name', 'to_world')
+        # lookat transformations – this is primarily useful for setting up cameras.
+        # The origin coordinates specify the camera origin, target is the point
+        # that the camera will look at, and the (optional) up parameter determines
+        # the upward direction in the final rendered image.
+        lookat = SubElement(transform, 'lookat')
+        lookat.set('origin', cam_origin)
+        lookat.set('target', cam_target)
+        lookat.set('up', cam_up)
+        #
         fl_str = SubElement(sensor, 'string')
         fl_str.set('name', 'focal_length')
         fl_str.set('value', focal_length)
+        #
         fov_float = SubElement(sensor, 'float')
         fov_float.set('name', 'fov')
         fov_float.set('value', fov)
@@ -94,18 +107,7 @@ class PARSE_OT_scene(Operator):
         integer.set('name', 'sample_count')
         integer.set('value', sampleCount)
 
-        # transform
-        transform = SubElement(sensor, 'transform')
-        transform.set('name', 'to_world')
 
-        # lookat transformations – this is primarily useful for setting up cameras.
-        # The origin coordinates specify the camera origin, target is the point
-        # that the camera will look at, and the (optional) up parameter determines
-        # the upward direction in the final rendered image.
-        lookat = SubElement(transform, 'lookat')
-        lookat.set('origin', cam_origin)
-        lookat.set('target', cam_target)
-        lookat.set('up', cam_up)
 
         # Generate an EXR image
         film = SubElement(sensor, 'film')
