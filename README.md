@@ -1,4 +1,4 @@
-# Mitsuba2 addon for blender 2.8x (Pre Alpha)
+# Mitsuba2 addon for blender 2.83 (Pre Alpha)
 Mitsuba exporter
 
 At the moment I'm just building the scene in .xml  
