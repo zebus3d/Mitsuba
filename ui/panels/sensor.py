@@ -18,11 +18,17 @@ class MITSUBA_PT_ui_sensor(Panel):
         layout.use_property_decorate = False
 
         scene = context.scene
+        scn_props = scene.mitsuba
 
         flow = layout.grid_flow(align=True)
         col = flow.column()
 
         col.prop(scene.mitsuba, 'sensorType')
+
+        if scn_props.sensorType == 'thinlens':
+            col.prop(scene.mitsuba, 'aperture_radius')
+            col.prop(scene.mitsuba, 'focus_distance')
+
         col.prop(scene.mitsuba, 'focal_length')
         col.prop(scene.mitsuba, 'fov')
         col.prop(scene.mitsuba, 'fov_axis')
