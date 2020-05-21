@@ -111,7 +111,8 @@ class MitsubaProperties(PropertyGroup):
     sensorType: EnumProperty(
         items=sensor_types,
         name="Type",
-        default="thinlens",
+        default="perspective",
+        # default="thinlens",
         description="Perspective simple or Perspective with whin thinlens (use thinlens for DOF)",
         # update=combo_texture_limit_changed
     )
