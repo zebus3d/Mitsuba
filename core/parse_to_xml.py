@@ -36,11 +36,15 @@ class PARSE_OT_scene(Operator):
 
         scn_props = context.scene.mitsuba
         integratorType = scn_props.integratorType
-        maxDepth = str(scn_props.maxDepth)
+        maxDepth = str( scn_props.maxDepth )
         filepath = context.preferences.addons['Mitsuba'].preferences.filepath
+
         sensorType = scn_props.sensorType
+        aperture_radius = str( "%.2f" % scn_props.aperture_radius )
+        focus_distance = str( "%.2f" % scn_props.focus_distance )
+
         samplerType = scn_props.samplerType
-        sampleCount = str(scn_props.sampleCount)
+        sampleCount = str( scn_props.sampleCount )
 
         r_width = str( scene.render.resolution_x )
         r_height = str( scene.render.resolution_y )
@@ -64,6 +68,14 @@ class PARSE_OT_scene(Operator):
         # Instantiate Camera
         sensor = SubElement(scene, 'sensor')
         sensor.set('type', sensorType)
+        # sensor para thinlens:
+        if sensorType == 'thinlens':
+            ar_float = SubElement(sensor, 'float')
+            ar_float.set('name', 'aperture_radius')
+            ar_float.set('value', aperture_radius)
+            fd_float = SubElement(sensor, 'float')
+            fd_float.set('name', 'focus_distance')
+            fd_float.set('value', focus_distance)
         # <float name="fov" value="45"/>
 
         # sampler
