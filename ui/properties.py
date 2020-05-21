@@ -47,7 +47,7 @@ class MitsubaProperties(PropertyGroup):
         default=0.01,
         min=1,
         max=179,
-        description='Denotes the camera’s field of view in degrees—must be between 1 and 179',
+        description='Denotes the camera’s field of view in degrees — must be between 1 and 179',
     )
     fov_axis: StringProperty(
         name='Fov Axis',
