@@ -29,14 +29,14 @@ class MitsubaProperties(PropertyGroup):
     # tanto aperture_radius como focus_distance son solo del sensor thinlens:
     aperture_radius: FloatProperty(
         name='Aperture Radius',
-        default=0.01,
+        default=0.001,
         precision=2,
         step = 1,
         description='Denotes the radius of the camera’s aperture in scene units',
     )
     focus_distance: FloatProperty(
         name='Focus Distance',
-        default=0,
+        default=1,
         precision=2,
         step = 1,
         description='Denotes the world-space distance from the camera’s aperture to the focal plane',
