@@ -35,6 +35,7 @@ class MITSUBA_PT_ui_sensor(Panel):
             if active_camera:
                 col.prop(active_camera.data, 'lens')
             else:
+                col.alignment = 'RIGHT'
                 col.label(icon='ERROR', text='The main camera at the scene has not been found.')
         else:
             col.prop(scene.mitsuba, 'fov')
