@@ -4,6 +4,10 @@ from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.dom import minidom
 from mathutils import Vector
 
+
+
+
+
 def prview_my_xml(my_xml):
     xmlstr_prettify = minidom.parseString( tostring(my_xml, encoding='utf-8', method='html') ).toprettyxml(indent="    ").replace("<?xml version=\"1.0\" ?>", "\nXML Preview:")
     xmlstr_prettify = xmlstr_prettify.replace('origin=', '\n                    origin=')
@@ -42,8 +46,11 @@ class PARSE_OT_scene(Operator):
         filepath = context.preferences.addons['Mitsuba'].preferences.filepath
 
         sensorType = scn_props.sensorType
+
+        # aperture_radius = str( '%5.3f'% scn_props.aperture_radius )
         aperture_radius = str( scn_props.aperture_radius )
         focus_distance = str( scn_props.focus_distance )
+
         focal_or_fov = scn_props.focal_or_fov
         # focal_length = str( scn_props.focal_length ) # mejor usare el de la propia camara:
         focal_length = str( active_camera.data.lens ) + 'mm'
