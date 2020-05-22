@@ -30,7 +30,7 @@ class MitsubaProperties(PropertyGroup):
     aperture_radius: FloatProperty(
         name='Aperture Radius',
         default=0.001,
-        precision=2,
+        precision=3,
         step = 1,
         description='Denotes the radius of the camera’s aperture in scene units',
     )
