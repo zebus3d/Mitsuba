@@ -41,14 +41,29 @@ class MitsubaProperties(PropertyGroup):
         step = 1,
         description='Denotes the world-space distance from the camera’s aperture to the focal plane',
     )
-    focal_length: StringProperty(
-        name='Focal Length',
-        default='50mm',
-        description='Denotes the camera’s focal length specified using 35mm film equivalent units',
+
+    focal_length_or_fov = (
+        ("focal_length", "Focal Length", "", 0),
+        ("fov", "Fov", "", 1),
     )
+    focal_or_fov: EnumProperty(
+        items=focal_length_or_fov,
+        name="Focal",
+        default="fov",
+        description="Use Focal length or Fov",
+    )
+    # mejor usare el propio valor de la camara 50mm
+    # focal_length: FloatProperty(
+    #     name='Focal Length',
+    #     default=50,  #50mm
+    #     precision=3,
+    #     subtype="DISTANCE",
+    #     unit="LENGTH",
+    #     description='Denotes the camera’s focal length specified using 35mm film equivalent units',
+    # )
     fov: FloatProperty(
         name='Fov',
-        default=0.01,
+        default=35.00,
         min=0.01,
         max=179.00,
         precision=2,
@@ -60,6 +75,7 @@ class MitsubaProperties(PropertyGroup):
         default='x',
         description='specifies the image axis',
     )
+
     near_clip: FloatProperty(
         name='Near Clip',
         default=0.01,
@@ -98,7 +114,7 @@ class MitsubaProperties(PropertyGroup):
     # sample_count
     sampleCount: IntProperty(
         name='Pixel Samples',
-        default=4,
+        default=8,
         min=1,
         soft_min=1,
         description='Number of samples to use for estimating the illumination at each pixel',

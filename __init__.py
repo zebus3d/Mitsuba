@@ -84,6 +84,7 @@ def get_panels():
         'RENDER_PT_output',
         'RENDER_PT_color_management',
         'RENDER_PT_color_management_curves',
+        'DATA_PT_lens',
         ]
 
     # paneles compatibles:

@@ -44,7 +44,9 @@ class PARSE_OT_scene(Operator):
         sensorType = scn_props.sensorType
         aperture_radius = str( "%.2f" % scn_props.aperture_radius )
         focus_distance = str( "%.2f" % scn_props.focus_distance )
-        focal_length = scn_props.focal_length
+        focal_or_fov = scn_props.focal_or_fov
+        # focal_length = str( scn_props.focal_length ) # mejor usare el de la propia camara:
+        focal_length = str( active_camera.data.lens ) + 'mm'
         fov = str( "%.2f" % scn_props.fov )
 
         samplerType = scn_props.samplerType
@@ -93,13 +95,14 @@ class PARSE_OT_scene(Operator):
         lookat.set('target', cam_target)
         lookat.set('up', cam_up)
         #
-        fl_str = SubElement(sensor, 'string')
-        fl_str.set('name', 'focal_length')
-        fl_str.set('value', focal_length)
-        #
-        fov_float = SubElement(sensor, 'float')
-        fov_float.set('name', 'fov')
-        fov_float.set('value', fov)
+        if focal_or_fov == 'focal_length':
+            fl_str = SubElement(sensor, 'string')
+            fl_str.set('name', 'focal_length')
+            fl_str.set('value', focal_length)
+        else:
+            fov_float = SubElement(sensor, 'float')
+            fov_float.set('name', 'fov')
+            fov_float.set('value', fov)
 
         # sampler
         # Render with x samples per pixel using a samplerType sampling strategy
