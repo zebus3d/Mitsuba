@@ -42,8 +42,8 @@ class PARSE_OT_scene(Operator):
         filepath = context.preferences.addons['Mitsuba'].preferences.filepath
 
         sensorType = scn_props.sensorType
-        aperture_radius = str( "%.2f" % scn_props.aperture_radius )
-        focus_distance = str( "%.2f" % scn_props.focus_distance )
+        aperture_radius = str( scn_props.aperture_radius )
+        focus_distance = str( scn_props.focus_distance )
         focal_or_fov = scn_props.focal_or_fov
         # focal_length = str( scn_props.focal_length ) # mejor usare el de la propia camara:
         focal_length = str( active_camera.data.lens ) + 'mm'
