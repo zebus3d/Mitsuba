@@ -39,7 +39,7 @@ class MITSUBA_PT_ui_sensor(Panel):
                 col.label(icon='ERROR', text='The main camera at the scene has not been found.')
         else:
             col.prop(scene.mitsuba, 'fov')
-            col.prop(scene.mitsuba, 'fov_axis')
+            # col.prop(scene.mitsuba, 'fov_axis')
 
         col.prop(scene.mitsuba, 'near_clip')
         col.prop(scene.mitsuba, 'far_clip')
