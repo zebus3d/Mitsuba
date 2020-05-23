@@ -131,6 +131,23 @@ class PARSE_OT_scene(Operator):
         integer.set('name', 'height')
         integer.set('value', r_height)
 
+        # lights
+        bpy.data.lights['Point'].type
+        for obj in bpy.data.objects:
+            if not obj.hide_render and obj.type == 'LIGHT':
+                light = bpy.data.lights[obj.name]
+                if light.type == 'POINT':
+                    emmitter = SubElement(scene, 'emitter')
+                    emmitter.set('type', 'point')
+                    spectrum = SubElement(emmitter, 'spectrum')
+                    spectrum.set('name', 'intensity')
+                    spectrum.set('value', str( light.energy ))
+                    point = SubElement(emmitter, 'point')
+                    point.set('name', 'position')
+                    point.set('x', str( obj.location.x ))
+                    point.set('y', str( obj.location.y ))
+                    point.set('z', str( obj.location.z ))
+
         # shapes obj
         tmp_dir = tempfile.gettempdir()+'/mitsuba'
 
