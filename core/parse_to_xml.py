@@ -198,6 +198,7 @@ class PARSE_OT_scene(Operator):
                 stdout, stderr = process.communicate()
                 # print("Finish!.")
                 self.report({'INFO'}, 'Render completed!')
+                bpy.ops.image.reload()
         else:
             self.report({'WARNING'}, 'It is mandatory to indicate in the addon preferences the correct location of the mitsuba executable. ')
 
