@@ -63,7 +63,7 @@ class MitsubaProperties(PropertyGroup):
     # )
     fov: FloatProperty(
         name='Fov',
-        default=35.00,
+        default=40.00,
         min=0.01,
         max=179.00,
         precision=2,
