@@ -50,6 +50,8 @@ if "bpy" in locals():
         importlib.reload(PARSE_OT_scene)
     if "MITSUBA_PT_ui_sensor" in locals():
         importlib.reload(MITSUBA_PT_ui_sensor)
+    if "MITSUBA_PT_ui_lights" in locals():
+        importlib.reload(MITSUBA_PT_ui_lights)
 else:
     import bpy
     from .ui.addon_preferences import MitsubaAddonPreferences
@@ -61,6 +63,7 @@ else:
     from .ui.panels.samples import MITSUBA_PT_ui_samples
     from .ui.panels.sensor import MITSUBA_PT_ui_sensor
     from .core.parse_to_xml import PARSE_OT_scene
+    from .ui.panels.lights import MITSUBA_PT_ui_lights
 
 
 from bpy.props import PointerProperty
@@ -81,7 +84,7 @@ def get_panels():
         'RENDER_PT_color_management',
         'RENDER_PT_color_management_curves',
         'DATA_PT_lens',
-        'CYCLES_LIGHT_PT_light',
+        # 'CYCLES_LIGHT_PT_light',
         ]
 
     # paneles compatibles:
@@ -104,7 +107,8 @@ all_classes = [
         MITSUBA_PT_ui_integrators,
         MITSUBA_PT_ui_samples,
         PARSE_OT_scene,
-        MITSUBA_PT_ui_sensor
+        MITSUBA_PT_ui_sensor,
+        MITSUBA_PT_ui_lights
     ]
 
 

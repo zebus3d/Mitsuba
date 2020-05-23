@@ -138,3 +138,10 @@ class MitsubaProperties(PropertyGroup):
         description="Perspective simple or Perspective with whin thinlens (use thinlens for DOF)",
         # update=combo_texture_limit_changed
     )
+    lightIntensity: IntProperty(
+        name='Intensity',
+        default=1,
+        min=0,
+        soft_min=0,
+        description='Light Intensity',
+    )

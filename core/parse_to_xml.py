@@ -62,6 +62,8 @@ class PARSE_OT_scene(Operator):
         r_width = str( scene.render.resolution_x )
         r_height = str( scene.render.resolution_y )
 
+        lightIntensity = str( scn_props.lightIntensity )
+
         # self.report({'INFO'}, 'Exporting scene')
         print("# Exporting scene...")
 
@@ -132,7 +134,6 @@ class PARSE_OT_scene(Operator):
         integer.set('value', r_height)
 
         # lights
-        bpy.data.lights['Point'].type
         for obj in bpy.data.objects:
             if not obj.hide_render and obj.type == 'LIGHT':
                 light = bpy.data.lights[obj.name]
@@ -141,7 +142,7 @@ class PARSE_OT_scene(Operator):
                     emmitter.set('type', 'point')
                     spectrum = SubElement(emmitter, 'spectrum')
                     spectrum.set('name', 'intensity')
-                    spectrum.set('value', str( light.energy ))
+                    spectrum.set('value', str( lightIntensity ))
                     point = SubElement(emmitter, 'point')
                     point.set('name', 'position')
                     point.set('x', str( obj.location.x ))
@@ -198,8 +199,8 @@ class PARSE_OT_scene(Operator):
                 stdout, stderr = process.communicate()
                 # print("Finish!.")
                 self.report({'INFO'}, 'Render completed!')
-                # bpy.ops.image.reload()
         else:
             self.report({'WARNING'}, 'It is mandatory to indicate in the addon preferences the correct location of the mitsuba executable. ')
 
+        bpy.ops.image.reload()
         return {'FINISHED'}
