@@ -62,8 +62,6 @@ class PARSE_OT_scene(Operator):
         r_width = str( scene.render.resolution_x )
         r_height = str( scene.render.resolution_y )
 
-        lightIntensity = str( scn_props.lightIntensity )
-
         # self.report({'INFO'}, 'Exporting scene')
         print("# Exporting scene...")
 
@@ -146,7 +144,7 @@ class PARSE_OT_scene(Operator):
                     emmitter.set('type', 'point')
                     spectrum = SubElement(emmitter, 'spectrum')
                     spectrum.set('name', 'intensity')
-                    spectrum.set('value', str( lightIntensity ))
+                    spectrum.set('value', str( light.energy ))
                     point = SubElement(emmitter, 'point')
                     point.set('name', 'position')
                     point.set('x', str( obj.location.x ))

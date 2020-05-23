@@ -17,6 +17,7 @@ class MITSUBA_PT_ui_lights(Panel):
 
     def draw(self, context):
         layout = self.layout
+        light = context.light
 
         layout.use_property_split = True
         layout.use_property_decorate = False
@@ -26,4 +27,5 @@ class MITSUBA_PT_ui_lights(Panel):
         flow = layout.grid_flow(align=True)
         col = flow.column()
 
-        col.prop(scene.mitsuba, 'lightIntensity')
+        col.prop(light, "color")
+        col.prop(light, "energy")
