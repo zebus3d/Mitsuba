@@ -4,7 +4,7 @@ from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.dom import minidom
 from mathutils import Vector
 import tempfile
-
+from subprocess import Popen, PIPE
 
 def prview_my_xml(my_xml):
     # xmlstr_prettify = minidom.parseString( tostring(my_xml, encoding='utf-8', method='html') ).toprettyxml(indent="    ").replace("<?xml version=\"1.0\" ?>", "<!-- XML Preview: -->")
@@ -62,6 +62,7 @@ class PARSE_OT_scene(Operator):
         r_width = str( scene.render.resolution_x )
         r_height = str( scene.render.resolution_y )
 
+        self.report({'INFO'}, 'Exporting scene')
         # scene to xml
         scene = Element('scene')
         scene.set('version', '2.0.0')
@@ -171,11 +172,17 @@ class PARSE_OT_scene(Operator):
 
         # renderize scene xml
         if filepath and os.path.isfile( filepath ):
-            print(filepath)
-            # mitusba_binary = os.path.basename( os.path.normpath(filepath) )
-            # dir_path = filepath.replace(mitusba_binary, '')
-            # print(dir_path, mitusba_binary)
-            # print( os.path.isfile( filepath ) )
+            if os.path.isfile(final_xml_file_path):
+                print("Rendering...")
+                self.report({'INFO'}, 'Starting rendering...')
+                process = Popen([filepath, final_xml_file_path], stdout=PIPE, stderr=PIPE)
+                stdout, stderr = process.communicate()
+                print("Finish!.")
+                self.report({'INFO'}, 'Render completed!')
+                # mitusba_binary = os.path.basename( os.path.normpath(filepath) )
+                # dir_path = filepath.replace(mitusba_binary, '')
+                # print(dir_path, mitusba_binary)
+                # print( os.path.isfile( filepath ) )
         else:
             self.report({'WARNING'}, 'It is mandatory to indicate in the addon preferences the correct location of the mitsuba executable. ')
 

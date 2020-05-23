@@ -26,4 +26,4 @@ class MITSUBA_PT_ui(Panel):
         flow = layout.grid_flow(align=True)
 
         col = flow.column()
-        col.operator("parse.scene", text="Export Scene")
+        col.operator("parse.scene", text="Render")
