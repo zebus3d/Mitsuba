@@ -5,7 +5,7 @@ from bpy.types import Panel
 
 class MITSUBA_PT_ui(Panel):
     bl_label = "Mitsuba Engine Settings"
-    bl_idname = "MITSUBA_PT_ui"
+    bl_idname = "MITSUBA_PT_ui_main"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "render"

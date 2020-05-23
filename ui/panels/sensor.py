@@ -6,7 +6,7 @@ from bpy.types import Panel
 class MITSUBA_PT_ui_sensor(Panel):
     bl_label = "Sensor"
     bl_idname = "MITSUBA_PT_ui_sensor"
-    bl_parent_id = "MITSUBA_PT_ui"
+    bl_parent_id = "MITSUBA_PT_ui_main"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "render"

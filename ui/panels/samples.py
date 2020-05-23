@@ -6,7 +6,7 @@ from bpy.types import Panel
 class MITSUBA_PT_ui_samples(Panel):
     bl_label = "Sampler"
     bl_idname = "MITSUBA_PT_ui_samples"
-    bl_parent_id = "MITSUBA_PT_ui"
+    bl_parent_id = "MITSUBA_PT_ui_main"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "render"
