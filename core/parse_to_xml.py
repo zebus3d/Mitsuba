@@ -62,7 +62,9 @@ class PARSE_OT_scene(Operator):
         r_width = str( scene.render.resolution_x )
         r_height = str( scene.render.resolution_y )
 
-        self.report({'INFO'}, 'Exporting scene')
+        # self.report({'INFO'}, 'Exporting scene')
+        print("# Exporting scene...")
+
         # scene to xml
         scene = Element('scene')
         scene.set('version', '2.0.0')
@@ -165,7 +167,7 @@ class PARSE_OT_scene(Operator):
 
         # write output xml file in the disk
         final_xml_file_path = tmp_dir+'/test_example.xml'
-        print("Writing " + final_xml_file_path + '...')
+        print("# Writing " + final_xml_file_path + '...')
         final_xml_file = open(final_xml_file_path,'w')
         final_xml_file.write(data_xml)
         final_xml_file.close()
@@ -173,11 +175,11 @@ class PARSE_OT_scene(Operator):
         # renderize scene xml
         if filepath and os.path.isfile( filepath ):
             if os.path.isfile(final_xml_file_path):
-                print("Rendering...")
-                self.report({'INFO'}, 'Starting rendering...')
+                print("# Rendering...")
+                # self.report({'INFO'}, 'Starting rendering...')
                 process = Popen([filepath, final_xml_file_path], stdout=PIPE, stderr=PIPE)
                 stdout, stderr = process.communicate()
-                print("Finish!.")
+                # print("Finish!.")
                 self.report({'INFO'}, 'Render completed!')
         else:
             self.report({'WARNING'}, 'It is mandatory to indicate in the addon preferences the correct location of the mitsuba executable. ')
