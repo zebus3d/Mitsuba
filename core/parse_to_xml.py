@@ -147,7 +147,7 @@ class PARSE_OT_scene(Operator):
 
                 target_file = os.path.join(tmp_dir, obj_target_name)
                 print("# Exporting " + target_file + '...')
-                bpy.ops.export_scene.obj(filepath=target_file, axis_forward='-Z', axis_up='Y', use_selection=True, use_animation=False, use_mesh_modifiers=True, use_smooth_groups=True, use_normals=True, use_uvs=True, use_materials=True, keep_vertex_order=True, global_scale=1)
+                bpy.ops.export_scene.obj(filepath=target_file, axis_forward='-Z', axis_up='Y', use_selection=True, use_animation=False, use_mesh_modifiers=True, use_smooth_groups=True, use_normals=True, use_uvs=True, use_materials=False, keep_vertex_order=True, global_scale=1)
 
                 obj.select_set(False)
 
