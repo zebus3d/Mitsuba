@@ -135,7 +135,7 @@ class PARSE_OT_scene(Operator):
 
         # lights
         for obj in bpy.data.objects:
-            if not obj.hide_render and obj.type == 'LIGHT': 
+            if not obj.hide_render and obj.type == 'LIGHT':
                 if obj.data.id_data.type == 'POINT':
                     light = obj.data.id_data
                     emmitter = SubElement(scene, 'emitter')
