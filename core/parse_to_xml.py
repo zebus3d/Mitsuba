@@ -3,17 +3,15 @@ from bpy.types import Operator
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.dom import minidom
 from mathutils import Vector
-
-
-
-
+import tempfile
 
 def prview_my_xml(my_xml):
-    xmlstr_prettify = minidom.parseString( tostring(my_xml, encoding='utf-8', method='html') ).toprettyxml(indent="    ").replace("<?xml version=\"1.0\" ?>", "\nXML Preview:")
+    xmlstr_prettify = minidom.parseString( tostring(my_xml, encoding='utf-8', method='html') ).toprettyxml(indent="    ").replace("<?xml version=\"1.0\" ?>", "<!-- XML Preview: -->")
     xmlstr_prettify = xmlstr_prettify.replace('origin=', '\n                    origin=')
     xmlstr_prettify = xmlstr_prettify.replace('target=', '\n                    target=')
     xmlstr_prettify = xmlstr_prettify.replace('up=', '\n                    up=')
     print( xmlstr_prettify )
+    return xmlstr_prettify
 
 
 def vector3_to_string(v):
@@ -131,7 +129,38 @@ class PARSE_OT_scene(Operator):
         integer.set('name', 'height')
         integer.set('value', r_height)
 
-        prview_my_xml(scene)
+        tmp_dir = tempfile.gettempdir()+'/mitsuba'
+
+        if not os.path.isdir(tmp_dir):
+            os.makedirs(tmp_dir)
+
+        bpy.ops.object.select_all(action='DESELECT')
+
+        for obj in bpy.data.objects:
+            if not obj.hide_render and obj.type == 'MESH':
+                context.view_layer.objects.active = obj
+                obj.select_set(True)
+
+                obj_target_name = obj.name + '.obj'
+
+                target_file = os.path.join(tmp_dir, obj_target_name)
+                bpy.ops.export_scene.obj(filepath=target_file, axis_forward='-Z', axis_up='Y', use_selection=True, use_animation=False, use_mesh_modifiers=True, use_smooth_groups=True, use_normals=True, use_uvs=True, use_materials=True, keep_vertex_order=True, global_scale=1)
+
+                obj.select_set(False)
+
+                if os.path.isfile(target_file):
+                    shape = SubElement(scene, 'shape')
+                    shape.set('type', 'obj')
+                    sstring = SubElement(shape, 'string')
+                    sstring.set('name', 'filename')
+                    sstring.set('value', target_file)
+
+        data_xml = prview_my_xml(scene)
+
+        final_xml_file_path = tmp_dir+'/test_example.xml'
+        final_xml_file = open(final_xml_file_path,'w')
+        final_xml_file.write(data_xml)
+        final_xml_file.close()
 
         if filepath and os.path.isfile( filepath ):
             print(filepath)
