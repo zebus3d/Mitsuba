@@ -128,6 +128,7 @@ class PARSE_OT_scene(Operator):
         integer.set('name', 'height')
         integer.set('value', r_height)
 
+        # shapes obj
         tmp_dir = tempfile.gettempdir()+'/mitsuba'
 
         if not os.path.isdir(tmp_dir):
@@ -158,14 +159,17 @@ class PARSE_OT_scene(Operator):
                     sstring.set('name', 'filename')
                     sstring.set('value', target_file)
 
+        # preview an data
         data_xml = prview_my_xml(scene)
 
+        # write output xml file in the disk
         final_xml_file_path = tmp_dir+'/test_example.xml'
         print("Writing " + final_xml_file_path + '...')
         final_xml_file = open(final_xml_file_path,'w')
         final_xml_file.write(data_xml)
         final_xml_file.close()
 
+        # renderize scene xml
         if filepath and os.path.isfile( filepath ):
             print(filepath)
             # mitusba_binary = os.path.basename( os.path.normpath(filepath) )
