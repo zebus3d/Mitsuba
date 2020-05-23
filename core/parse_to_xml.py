@@ -179,10 +179,6 @@ class PARSE_OT_scene(Operator):
                 stdout, stderr = process.communicate()
                 print("Finish!.")
                 self.report({'INFO'}, 'Render completed!')
-                # mitusba_binary = os.path.basename( os.path.normpath(filepath) )
-                # dir_path = filepath.replace(mitusba_binary, '')
-                # print(dir_path, mitusba_binary)
-                # print( os.path.isfile( filepath ) )
         else:
             self.report({'WARNING'}, 'It is mandatory to indicate in the addon preferences the correct location of the mitsuba executable. ')
 
