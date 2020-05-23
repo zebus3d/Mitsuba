@@ -5,8 +5,10 @@ from xml.dom import minidom
 from mathutils import Vector
 import tempfile
 
+
 def prview_my_xml(my_xml):
-    xmlstr_prettify = minidom.parseString( tostring(my_xml, encoding='utf-8', method='html') ).toprettyxml(indent="    ").replace("<?xml version=\"1.0\" ?>", "<!-- XML Preview: -->")
+    # xmlstr_prettify = minidom.parseString( tostring(my_xml, encoding='utf-8', method='html') ).toprettyxml(indent="    ").replace("<?xml version=\"1.0\" ?>", "<!-- XML Preview: -->")
+    xmlstr_prettify = minidom.parseString( tostring(my_xml, encoding='utf-8', method='html') ).toprettyxml(indent="    ")
     xmlstr_prettify = xmlstr_prettify.replace('origin=', '\n                    origin=')
     xmlstr_prettify = xmlstr_prettify.replace('target=', '\n                    target=')
     xmlstr_prettify = xmlstr_prettify.replace('up=', '\n                    up=')
@@ -34,9 +36,9 @@ class PARSE_OT_scene(Operator):
             return {'CANCELLED'}
 
         cam_origin = vector3_to_string( active_camera.location )
-        # La @ es para multiplicar matrices con vectores
         cam_target = vector3_to_string( active_camera.matrix_world @ Vector((0, 0, -1, 1)) )
         cam_up = vector3_to_string( active_camera.matrix_world @ Vector((0, 1, 0, 0)) )
+        # La @ es para multiplicar matrices con vectores.
 
         scn_props = context.scene.mitsuba
         integratorType = scn_props.integratorType
@@ -66,7 +68,6 @@ class PARSE_OT_scene(Operator):
 
         # integrator
         integrator = SubElement(scene, 'integrator')
-
 
         # Instantiate a path tracer with a max.
         # path length of maxDepth
@@ -116,8 +117,6 @@ class PARSE_OT_scene(Operator):
         integer = SubElement(sampler, 'integer')
         integer.set('name', 'sample_count')
         integer.set('value', sampleCount)
-
-
 
         # Generate an EXR image
         film = SubElement(sensor, 'film')
