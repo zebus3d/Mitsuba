@@ -134,6 +134,9 @@ class PARSE_OT_scene(Operator):
         if not os.path.isdir(tmp_dir):
             os.makedirs(tmp_dir)
 
+        if bpy.context.mode != 'OBJECT':
+            bpy.ops.object.mode_set(mode='OBJECT')
+
         bpy.ops.object.select_all(action='DESELECT')
 
         for obj in bpy.data.objects:
