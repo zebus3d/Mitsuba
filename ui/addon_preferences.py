@@ -5,14 +5,14 @@ class MitsubaAddonPreferences(AddonPreferences):
     # this must match the addon name
     bl_idname = 'Mitsuba'
 
-    filepath: StringProperty(
-        name="Mitsuba binary",
-        subtype="FILE_PATH",
-        # default=find_mitsuba_path(),
+    mitsuba2_path: StringProperty(
+        name='Mitsuba2 folder',
+        # subtype='FILE_PATH',
+        subtype='DIR_PATH'
     )
 
 
     def draw(self, context):
         layout = self.layout
         # layout.label(text="This is a preferences view for our add-on")
-        layout.prop(self, "filepath")
+        layout.prop(self, "mitsuba2_path")

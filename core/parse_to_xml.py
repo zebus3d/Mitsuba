@@ -43,7 +43,9 @@ class PARSE_OT_scene(Operator):
         scn_props = context.scene.mitsuba
         integratorType = scn_props.integratorType
         maxDepth = str( scn_props.maxDepth )
-        filepath = context.preferences.addons['Mitsuba'].preferences.filepath
+        mitsuba2_path = context.preferences.addons['Mitsuba'].preferences.mitsuba2_path
+        mitsuba2_path_binary = os.path.join(mitsuba2_path, 'build/dist/mitsuba')
+        mitsuba2_path_for_import = os.path.join(mitsuba2_path, 'build/dist/python')
 
         sensorType = scn_props.sensorType
 
@@ -193,11 +195,11 @@ class PARSE_OT_scene(Operator):
         final_xml_file.close()
 
         # renderize scene xml
-        if filepath and os.path.isfile( filepath ):
+        if mitsuba2_path_binary and os.path.isfile( mitsuba2_path_binary ):
             if os.path.isfile(final_xml_file_path):
                 print("# Rendering...")
                 # self.report({'INFO'}, 'Starting rendering...')
-                process = Popen([filepath, final_xml_file_path], stdout=PIPE, stderr=PIPE)
+                process = Popen([mitsuba2_path_binary, final_xml_file_path], stdout=PIPE, stderr=PIPE)
                 stdout, stderr = process.communicate()
                 # print("Finish!.")
                 self.report({'INFO'}, 'Render completed!')
