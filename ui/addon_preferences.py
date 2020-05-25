@@ -8,7 +8,8 @@ class MitsubaAddonPreferences(AddonPreferences):
     mitsuba2_path: StringProperty(
         name='Mitsuba2 folder',
         # subtype='FILE_PATH',
-        subtype='DIR_PATH'
+        subtype='DIR_PATH',
+        description='For example: "/home/zebus3d/mitsuba2/" Where you have downloaded the mitsuba2 main folder'
     )
 
 
