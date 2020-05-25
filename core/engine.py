@@ -1,4 +1,4 @@
-import bpy
+import bpy, sys, os
 
 
 class MitsubaRenderEngine(bpy.types.RenderEngine):
@@ -23,6 +23,15 @@ class MitsubaRenderEngine(bpy.types.RenderEngine):
     # This is the method called by Blender for both final renders (F12) and
     # small preview for materials, world and lights.
     def render(self, depsgraph):
+
+        print("# engine.render executed")
+        mitsuba2_path = bpy.context.preferences.addons['Mitsuba'].preferences.mitsuba2_path
+        mitsuba2_path_binary = os.path.join(mitsuba2_path, 'build/dist/mitsuba')
+        mitsuba2_path_for_import = os.path.join(mitsuba2_path, 'build/dist/python')
+        # print(mitsuba2_path_for_import)
+        sys.path.append(mitsuba2_path_for_import)
+        import mitsuba
+
         scene = depsgraph.scene
         scale = scene.render.resolution_percentage / 100.0
         self.size_x = int(scene.render.resolution_x * scale)
